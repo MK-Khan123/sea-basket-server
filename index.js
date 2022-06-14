@@ -20,12 +20,11 @@ async function run() {
         const categoriesCollection = database.collection(`${process.env.DB_COLLECTION3}`);
 
         //GET API
-        //For fetching all the food items
-        app.get('/banner', async (req, res) => {
-            // const cursor = banner.find({});
-            // const products = await cursor.toArray();
-            // res.send(products);
-            // console.log('Banner getting hit');
+        //For fetching all the categories
+        app.get('/categories', async (req, res) => {
+            const cursor = categoriesCollection.find({});
+            const categories = await cursor.toArray();
+            res.send(categories);
         });
 
     } finally {
