@@ -17,7 +17,10 @@ async function run() {
         await client.connect();
         const database = client.db(`${process.env.DB_NAME}`);
         const banner = database.collection(`${process.env.DB_COLLECTION1}`);
+        const howItWorks = database.collection(`${process.env.DB_COLLECTION2}`);       
         const categoriesCollection = database.collection(`${process.env.DB_COLLECTION3}`);
+        const video = database.collection(`${process.env.DB_COLLECTION4}`);
+        const faqsCollection = database.collection(`${process.env.DB_COLLECTION5}`);
 
         //GET API
         //For fetching all the categories
@@ -25,6 +28,12 @@ async function run() {
             const cursor = categoriesCollection.find({});
             const categories = await cursor.toArray();
             res.send(categories);
+        });
+
+        app.get('/faqs', async (req, res) => {
+            const cursor = faqsCollection.find({});
+            const faqs = await cursor.toArray();
+            res.send(faqs);
         });
 
     } finally {
