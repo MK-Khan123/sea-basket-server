@@ -1,5 +1,5 @@
 const express = require('express');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
 const app = express();
@@ -17,7 +17,7 @@ async function run() {
         await client.connect();
         const database = client.db(`${process.env.DB_NAME}`);
         const bannerData = database.collection(`${process.env.DB_COLLECTION1}`);
-        const howItWorksData = database.collection(`${process.env.DB_COLLECTION2}`);       
+        const howItWorksData = database.collection(`${process.env.DB_COLLECTION2}`);
         const categoriesCollection = database.collection(`${process.env.DB_COLLECTION3}`);
         const introVideoData = database.collection(`${process.env.DB_COLLECTION4}`);
         const faqsCollection = database.collection(`${process.env.DB_COLLECTION5}`);
@@ -26,7 +26,6 @@ async function run() {
         const logoData = database.collection(`${process.env.DB_COLLECTION8}`);
 
         //GET API
-        //For fetching all the categories
         app.get('/banner', async (req, res) => {
             const cursor = bannerData.find({});
             const banner = await cursor.toArray();
@@ -74,6 +73,19 @@ async function run() {
             const logo = await cursor.toArray();
             res.send(logo);
         });
+
+        //PATCH API
+        app.patch('/editBanner/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedBannerUrl = req.body.imageUrl;
+            const filter = { _id: ObjectId(id) };
+            const action = {
+                $set: { imageUrl: updatedBannerUrl }
+            };
+            const result = await bannerData.updateOne(filter, action);
+            res.send(result.modifiedCount > 0);
+        });
+
 
     } finally {
         // await client.close();
