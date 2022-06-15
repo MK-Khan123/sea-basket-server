@@ -38,6 +38,12 @@ async function run() {
             res.send(categories);
         });
 
+        app.get('/introVideo', async (req, res) => {
+            const cursor = introVideoData.find({});
+            const introVideo = await cursor.toArray();
+            res.send(introVideo);
+        });
+
         app.get('/faqs', async (req, res) => {
             const cursor = faqsCollection.find({});
             const faqs = await cursor.toArray();
