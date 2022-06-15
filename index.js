@@ -21,6 +21,7 @@ async function run() {
         const categoriesCollection = database.collection(`${process.env.DB_COLLECTION3}`);
         const video = database.collection(`${process.env.DB_COLLECTION4}`);
         const faqsCollection = database.collection(`${process.env.DB_COLLECTION5}`);
+        const hotTopicsCollection = database.collection(`${process.env.DB_COLLECTION7}`);
 
         //GET API
         //For fetching all the categories
@@ -34,6 +35,12 @@ async function run() {
             const cursor = faqsCollection.find({});
             const faqs = await cursor.toArray();
             res.send(faqs);
+        });
+
+        app.get('/hotTopics', async (req, res) => {
+            const cursor = hotTopicsCollection.find({});
+            const hotTopics = await cursor.toArray();
+            res.send(hotTopics);
         });
 
     } finally {
