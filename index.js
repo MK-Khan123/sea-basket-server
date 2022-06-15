@@ -16,16 +16,22 @@ async function run() {
     try {
         await client.connect();
         const database = client.db(`${process.env.DB_NAME}`);
-        const banner = database.collection(`${process.env.DB_COLLECTION1}`);
-        const howItWorks = database.collection(`${process.env.DB_COLLECTION2}`);       
+        const bannerData = database.collection(`${process.env.DB_COLLECTION1}`);
+        const howItWorksData = database.collection(`${process.env.DB_COLLECTION2}`);       
         const categoriesCollection = database.collection(`${process.env.DB_COLLECTION3}`);
-        const video = database.collection(`${process.env.DB_COLLECTION4}`);
+        const introVideoData = database.collection(`${process.env.DB_COLLECTION4}`);
         const faqsCollection = database.collection(`${process.env.DB_COLLECTION5}`);
         const readingMaterialsCollection = database.collection(`${process.env.DB_COLLECTION6}`);
         const hotTopicsCollection = database.collection(`${process.env.DB_COLLECTION7}`);
 
         //GET API
         //For fetching all the categories
+        app.get('/banner', async (req, res) => {
+            const cursor = bannerData.find({});
+            const banner = await cursor.toArray();
+            res.send(banner);
+        });
+
         app.get('/categories', async (req, res) => {
             const cursor = categoriesCollection.find({});
             const categories = await cursor.toArray();
