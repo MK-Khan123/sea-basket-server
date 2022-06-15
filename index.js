@@ -132,6 +132,12 @@ async function run() {
             res.json(result);
         });
 
+        app.post('/addReadingMaterials', async (req, res) => {
+            const newReadingMaterials = req.body;
+            const result = await readingMaterialsCollection.insertOne(newReadingMaterials);
+            res.json(result);
+        });
+
         //DELETE API
         app.delete('/deleteCategory/:id', async (req, res) => {
             const id = req.params.id;
