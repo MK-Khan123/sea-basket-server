@@ -32,6 +32,12 @@ async function run() {
             res.send(banner);
         });
 
+        app.get('/howItWorks', async (req, res) => {
+            const cursor = howItWorksData.find({});
+            const howItWorks = await cursor.toArray();
+            res.send(howItWorks);
+        });
+
         app.get('/categories', async (req, res) => {
             const cursor = categoriesCollection.find({});
             const categories = await cursor.toArray();
