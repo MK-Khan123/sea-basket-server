@@ -97,6 +97,17 @@ async function run() {
             res.send(result.modifiedCount > 0);
         });
 
+        app.patch('/editVideo/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedVideo = req.body.videoUrl;
+            const filter = { _id: ObjectId(id) };
+            const action = {
+                $set: { videoUrl: updatedVideo }
+            };
+            const result = await introVideoData.updateOne(filter, action);
+            res.send(result.modifiedCount > 0);
+        });
+
 
     } finally {
         // await client.close();
