@@ -86,6 +86,17 @@ async function run() {
             res.send(result.modifiedCount > 0);
         });
 
+        app.patch('/editContent/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedContent = req.body.content;
+            const filter = { _id: ObjectId(id) };
+            const action = {
+                $set: { content: updatedContent }
+            };
+            const result = await howItWorksData.updateOne(filter, action);
+            res.send(result.modifiedCount > 0);
+        });
+
 
     } finally {
         // await client.close();
