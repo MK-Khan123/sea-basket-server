@@ -23,6 +23,7 @@ async function run() {
         const faqsCollection = database.collection(`${process.env.DB_COLLECTION5}`);
         const readingMaterialsCollection = database.collection(`${process.env.DB_COLLECTION6}`);
         const hotTopicsCollection = database.collection(`${process.env.DB_COLLECTION7}`);
+        const logoData = database.collection(`${process.env.DB_COLLECTION8}`);
 
         //GET API
         //For fetching all the categories
@@ -66,6 +67,12 @@ async function run() {
             const cursor = readingMaterialsCollection.find({});
             const readingMaterials = await cursor.toArray();
             res.send(readingMaterials);
+        });
+
+        app.get('/logo', async (req, res) => {
+            const cursor = logoData.find({});
+            const logo = await cursor.toArray();
+            res.send(logo);
         });
 
     } finally {
