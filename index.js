@@ -119,6 +119,13 @@ async function run() {
             res.send(result.modifiedCount > 0);
         });
 
+        //POST API
+        app.post('/addCategories', async (req, res) => {
+            const newCategory = req.body;
+            const result = await categoriesCollection.insertOne(newCategory);
+            res.json(result);
+        });
+
 
     } finally {
         // await client.close();
