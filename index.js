@@ -108,6 +108,17 @@ async function run() {
             res.send(result.modifiedCount > 0);
         });
 
+        app.patch('/editLogo/:id', async (req, res) => {
+            const id = req.params.id;
+            const updatedLogo = req.body.imageUrl;
+            const filter = { _id: ObjectId(id) };
+            const action = {
+                $set: { imageUrl: updatedLogo }
+            };
+            const result = await logoData.updateOne(filter, action);
+            res.send(result.modifiedCount > 0);
+        });
+
 
     } finally {
         // await client.close();
