@@ -126,6 +126,12 @@ async function run() {
             res.json(result);
         });
 
+        app.post('/addFaqs', async (req, res) => {
+            const newFAQ = req.body;
+            const result = await faqsCollection.insertOne(newFAQ);
+            res.json(result);
+        });
+
         //DELETE API
         app.delete('/deleteCategory/:id', async (req, res) => {
             const id = req.params.id;
