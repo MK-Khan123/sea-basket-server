@@ -45,6 +45,6 @@ Thank you.
 
 ![Categories](https://res.cloudinary.com/dn9k2jkdd/image/upload/v1655309107/proffus-task/categories_f98mni.png)
 
-![Admin Panel](https://res.cloudinary.com/dn9k2jkdd/image/upload/v1655309107/proffus-task/categories_f98mni.png)
+![Admin Panel](https://res.cloudinary.com/dn9k2jkdd/image/upload/v1655309107/proffus-task/admin-panel_dxdsm8.png)
 
 ![Login](https://res.cloudinary.com/dn9k2jkdd/image/upload/v1655309107/proffus-task/login_im5kaq.png)
