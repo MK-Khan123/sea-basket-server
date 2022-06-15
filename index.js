@@ -133,8 +133,14 @@ async function run() {
         });
 
         app.post('/addReadingMaterials', async (req, res) => {
-            const newReadingMaterials = req.body;
-            const result = await readingMaterialsCollection.insertOne(newReadingMaterials);
+            const newReadingMaterial = req.body;
+            const result = await readingMaterialsCollection.insertOne(newReadingMaterial);
+            res.json(result);
+        });
+
+        app.post('/addHotTopics', async (req, res) => {
+            const newHotTopic = req.body;
+            const result = await hotTopicsCollection.insertOne(newHotTopic);
             res.json(result);
         });
 
@@ -157,6 +163,13 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await readingMaterialsCollection.deleteOne(query);
+            res.json(result);
+        });
+
+        app.delete('/deleteHotTopics/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await hotTopicsCollection.deleteOne(query);
             res.json(result);
         });
 
